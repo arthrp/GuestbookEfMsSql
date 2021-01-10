@@ -20,6 +20,7 @@ namespace GuestbookEfMsSql.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
