@@ -6,22 +6,37 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GuestbookEfMsSql.Models;
+using GuestbookEfMsSql.Repositories;
+using GuestbookEfMsSql.Dtos;
 
 namespace GuestbookEfMsSql.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly PostRepository _postRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, PostRepository postRepository)
         {
             _logger = logger;
+            _postRepository = postRepository;
         }
 
         public IActionResult Index()
         {
-            
-            return View();
+            var data = _postRepository.GetAll();
+            var model = new GuestbookViewModel(){ AllPosts = data };
+            return View(model);
+        }
+
+        public IActionResult AddPost(PostDto post)
+        {
+            post.AddedDate = DateTime.UtcNow;
+            _postRepository.Insert(post);
+
+            var posts = _postRepository.GetAll();
+            var model = new GuestbookViewModel() { AllPosts = posts };
+            return View("Index", model);
         }
 
         public IActionResult Privacy()

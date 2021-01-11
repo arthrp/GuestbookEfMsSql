@@ -8,6 +8,6 @@ namespace GuestbookEfMsSql.Dtos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Text { get; set; }
-        public DateTime AddedOn { get; set; }
+        public DateTime AddedDate { get; set; }
     }
 }

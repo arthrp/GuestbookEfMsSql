@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using DbUp;
+using GuestbookEfMsSql.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,8 @@ namespace GuestbookEfMsSql
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //Db Migrations
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             EnsureDatabase.For.SqlDatabase(connectionString);
 
@@ -43,6 +46,9 @@ namespace GuestbookEfMsSql
             {
                 throw new Exception(result.Error.ToString());
             }
+
+            services.AddTransient<MainDbContext>();
+            services.AddTransient<PostRepository>();
 
             services.AddDbContext<MainDbContext>(options => options.UseSqlServer(connectionString));
         }
