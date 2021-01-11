@@ -1,3 +1,3 @@
 # GuestbookEfMsSql
 
-Example of MS SQL based app which uses EF ORM
+Simple guestbook with EF as ORM and MS SQL as backend using DbUp for migrations
