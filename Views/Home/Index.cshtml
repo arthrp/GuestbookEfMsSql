@@ -27,7 +27,7 @@
     <div id="posts">
         @foreach (var post in Model.AllPosts)
         {
-            <div><p><b>Anonymous</b> posted on @post.AddedDate.ToString("yyyy-MM-dd hh:mm:ss")</p></div>
+            <div><p><b>@post.Username</b> posted on @post.AddedDate.ToString("yyyy-MM-dd hh:mm:ss")</p></div>
             <div>@post.Text</div>
         }
     </div>

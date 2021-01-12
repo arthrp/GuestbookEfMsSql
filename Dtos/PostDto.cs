@@ -9,5 +9,6 @@ namespace GuestbookEfMsSql.Dtos
         public Guid Id { get; set; }
         public string Text { get; set; }
         public DateTime AddedDate { get; set; }
+        public string Username { get; set; }
     }
 }
